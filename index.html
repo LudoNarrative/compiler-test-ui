@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Compiler Test UI</title>
+    <link rel="stylesheet" type="text/css" href="style/main.css">
+</head>
+<body>
+<div id="content">
+  <div class="header">Goals:</div>
+  <div id="goals"></div><br>
+  <div id="gameContainer"></div>
+  <div id="resources">
+    <p><b>r1: </b><span id="r1"></span></p>
+    <p><b>r2: </b><span id="r2"></span></p>
+    <p><b></b><span id="click"></span></p>
+  </div>
+</div>
+<script src="jquery.js"></script>
+<script src="phaser.js"></script>
+<script src="js/game-complete-1.js"></script>
+<script>
+$( document ).ready(function() {
+  game = new Phaser.Game(400, 300, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update }, false);
+
+  var goals = getAspGoals();
+  for (var i=0; i<goals.length;i++){
+    document.getElementById("goals").innerHTML += "* " + goals[i] + "<br>";
+  }
+});
+</script>
+</body>
+</html>
