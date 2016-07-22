@@ -15,9 +15,9 @@ var e2;
 var r1;
 var r2;
 function preload(){
-	game.load.image('e1','assets/sprites/star.png');
+	game.load.image('e1','assets/sprites/circle.png');
 
-	game.load.image('e2','assets/sprites/pentagon.png');
+	game.load.image('e2','assets/sprites/square.png');
 };
 
 function create(){
@@ -35,14 +35,14 @@ function create(){
 	goals=[];
 
 	e1=game.add.physicsGroup();
-	addedEntities['e1']=e1
+	addedEntities['e1']=e1;
 	initEntityProperties(e1);
 
 	e2=game.add.physicsGroup();
-	addedEntities['e2']=e2
+	addedEntities['e2']=e2;
 	initEntityProperties(e2);
-	r1=low;
-	r2=medium;
+	r1=high;
+	r2=0;
 	document.getElementById("r1").innerHTML = r1;
 	document.getElementById("r2").innerHTML = r2;
 
@@ -54,46 +54,54 @@ function create(){
 	initEntityProperties(e2);
 
 
-	addedEntities['e2'].forEach(function(item){
-		item.inputEnabled=true;
-		item.events.onInputDown.add(e2ClickListener,this);
-	}, this);
-
 	addedEntities['e1'].forEach(function(item){
 		item.inputEnabled=true;
 		item.events.onInputDown.add(e1ClickListener,this);
 	}, this);
+
+	addedEntities['e2'].forEach(function(item){
+		item.inputEnabled=true;
+		item.events.onInputDown.add(e2ClickListener,this);
+	}, this);
 };
 
 function update(){
-	r2=r2+high;
+	r2=r2+r1;
 
-	r1=r1-medium;
-
+	r1=r1-low;
 	document.getElementById("r1").innerHTML = r1;
 	document.getElementById("r2").innerHTML = r2;
 
-	if(r1<=0){
+	if(r1<=medium){
 		changeMode('game_loss');
 		}
 
 	addedEntities['e1'].forEach(function(item) {
-		var tempPoint = new Phaser.Point(game.input.mousePointer.x-item.x,game.input.mousePointer.y-item.y);
+		addedEntities['e2'].forEach(function(item2) {
+		var tempPoint = new Phaser.Point(item2.x-item.x,item2.y-item.y);
 		tempPoint.normalize();
+		tempPoint.x *= 100;
+		tempPoint.y *= 100;
+		item.body.velocity.x *= 0.1;
+		item.body.velocity.y *= 0.1;
 		move_towards(item, tempPoint);
+}, this);
 }, this);
 
 	addedEntities['e2'].forEach(function(item) {
-		addedEntities['e1'].forEach(function(item2) {
-		var tempPoint = new Phaser.Point(item2.x-item.x,item2.y-item.y);
+		var tempPoint = new Phaser.Point(game.input.mousePointer.x-item.x,game.input.mousePointer.y-item.y);
 		tempPoint.normalize();
-		move_away(item, tempPoint);
-}, this);
+		tempPoint.x *= 100;
+		tempPoint.y *= 100;
+		item.body.velocity.x *= 0.1;
+		item.body.velocity.y *= 0.1;
+		move_towards(item, tempPoint);
 }, this);
 
 	for(var k in addedEntities) {if (addedEntities.hasOwnProperty(k)) {
 		var entity = addedEntities[k];
 		entity.forEach(function(item) {
+		item.body.velocity.clamp(-300,300);
 			if(item.x>game.width){item.x=game.width;}if (item.x<0){item.x=0;} if (item.y>game.height){item.y=game.height;}if (item.y<0){item.y=0;}
 		}, this);
 	}}
@@ -101,21 +109,21 @@ function update(){
 
 function render(){};
 
+function e1ClickListener(){
+	if(r2<=high){
+		r1=r1+medium;
+		}
+	document.getElementById("r1").innerHTML = r1;
+	document.getElementById("r2").innerHTML = r2;
+  document.getElementById("click").innerHTML = "Entity e1 clicked!  r1=r1+medium if r2<=high.";
+};
+
 function e2ClickListener(){
 	r1=r1-r2;
 	r2=r2-medium;
-
 	document.getElementById("r1").innerHTML = r1;
 	document.getElementById("r2").innerHTML = r2;
-  document.getElementById("click").innerHTML = "Entity e2 clicked. r1 = r1-r2.  r2 = r2-medium.";
-};
-
-function e1ClickListener(){
-	if(r2<=high){
-		r1=r1+r2;
-		}
-	document.getElementById("r1").innerHTML = r1;
-  document.getElementById("click").innerHTML = "Entity e1 clicked. r1 = r1+r2 if r2 <= high.";
+  document.getElementById("click").innerHTML = "Entity e2 clicked! r1=r1-r2. r2=r2-medium.";	
 };
 
 function setVariable(varName,value){
@@ -186,6 +194,8 @@ function move_backward(e,amount){
 function initEntityProperties(group){
 	group.forEach(function(item) {
 	item.body.collideWorldBounds = true;
+	item.pivot.x = 16;
+	item.pivot.y = 16;
 	if (!item.body.velocity.hasOwnProperty('x')){item.body.velocity.x=0;}
 	if (!item.body.velocity.hasOwnProperty('y')){item.body.velocity.y=0;}
 	if (!item.body.hasOwnProperty('angularVelocity')){item.body.angularVelocity=0;}
@@ -207,4 +217,4 @@ function getAspGoals(){
 	else{return goals;}
 };
 
-goals=['Prevent:[r1] le [0]','Maintain r1'];
+goals=['Prevent:[r1] le [medium]','Maintain r1'];
