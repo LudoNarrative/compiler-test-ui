@@ -15,19 +15,25 @@
     <p><b>r2: </b><span id="r2"></span></p>
     <p><b></b><span id="click"></span></p>
   </div>
+  <button onclick="restartGame();">Restart Game</button>
 </div>
 <script src="jquery.js"></script>
 <script src="phaser.js"></script>
 <script src="js/game-1.js"></script>
 <script>
+var game;
 $( document ).ready(function() {
-  game = new Phaser.Game(400, 300, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update }, false);
+  game = new Phaser.Game(400, 300, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update, render: render }, false);
 
   var goals = getAspGoals();
   for (var i=0; i<goals.length;i++){
     document.getElementById("goals").innerHTML += "* " + goals[i] + "<br>";
   }
 });
+function restartGame(){
+  document.getElementById('gameContainer').innerHTML = "";
+  game = new Phaser.Game(400, 300, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update, render: render}, false);
+}
 </script>
 </body>
 </html>
