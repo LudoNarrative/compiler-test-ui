@@ -65,13 +65,13 @@ function update(){
 
 	addedEntities['e2'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e2ClickListener,this);
+		item.events.onInputDown.add(o3_e2ClickListener,this);
 	}, this);
 
 	game.physics.arcade.overlap(addedEntities['e1'],addedEntities['e2'],o6OverlapHandler,null, this);
 	addedEntities['e1'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e1ClickListener,this);
+		item.events.onInputDown.add(o2_e1ClickListener,this);
 	}, this);
 
 	if(r2>=medium && game.input.activePointer.leftButton.isDown){
@@ -156,7 +156,7 @@ function o6OverlapHandler(e1,e2){
 		}
 };
 
-function e1ClickListener(){
+function o2_e1ClickListener(){
 	if(r1<=low){
 		e1.destroy();
 
@@ -265,7 +265,7 @@ function getAspGoals(){
 	else{return goals;}
 };
 
-function e2ClickListener(entity){
+function o3_e2ClickListener(entity){
 	game.physics.arcade.overlap(entity, addedEntities['e2'], o3OverlapHandler, null, this);
 };
 

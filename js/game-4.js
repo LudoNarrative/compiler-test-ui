@@ -70,12 +70,12 @@ function update(){
 
 	addedEntities['e2'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e2ClickListener,this);
+		item.events.onInputDown.add(o3_e2ClickListener,this);
 	}, this);
 
 	addedEntities['e1'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e1ClickListener,this);
+		item.events.onInputDown.add(o6_e1ClickListener,this);
 	}, this);
 
 	game.physics.arcade.overlap(addedEntities['e1'],addedEntities['e2'],o2OverlapHandler,null, this);
@@ -141,7 +141,7 @@ function update(){
 
 function render(){};
 
-function e2ClickListener(){
+function o3_e2ClickListener(){
 	if(r2>=high){
 		e1.create(grid[gridIdx].x,grid[gridIdx].y,'e1');
 	updateGrid();
@@ -151,7 +151,7 @@ function e2ClickListener(){
 		}
 };
 
-function e1ClickListener(){
+function o6_e1ClickListener(){
 	if(r2>=high){
 		e1.create(grid[gridIdx].x,grid[gridIdx].y,'e1');
 	updateGrid();
@@ -164,8 +164,8 @@ function o2OverlapHandler(e1,e2){
 
 	if(r2>=high){
 		e1.create(grid[gridIdx].x,grid[gridIdx].y,'e1');
-		updateGrid();
-		initEntityProperties(e1);
+	updateGrid();
+	initEntityProperties(e1);
 		}
 };
 

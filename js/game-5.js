@@ -65,28 +65,28 @@ function update(){
 
 	addedEntities['e2'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e2ClickListener,this);
+		item.events.onInputDown.add(o4_e2ClickListener,this);
 	}, this);
 
 	addedEntities['e2'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e2ClickListener,this);
+		item.events.onInputDown.add(o1_e2ClickListener,this);
 	}, this);
 
 	game.physics.arcade.overlap(addedEntities['e1'],addedEntities['e2'],o7OverlapHandler,null, this);
 	addedEntities['e2'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e2ClickListener,this);
+		item.events.onInputDown.add(o6_e2ClickListener,this);
 	}, this);
 
 	addedEntities['e2'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e2ClickListener,this);
+		item.events.onInputDown.add(o5_e2ClickListener,this);
 	}, this);
 
 	addedEntities['e1'].forEach(function(item){
 		item.inputEnabled=true;
-		item.events.onInputDown.add(e1ClickListener,this);
+		item.events.onInputDown.add(o2_e1ClickListener,this);
 	}, this);
 
 	if(r1<=0){
@@ -119,11 +119,20 @@ function update(){
 
 function render(){};
 
-function e2ClickListener(){
-	if(r2<=r1){
+function o4_e2ClickListener(){
+	if(r1>=medium){
 		e2.destroy();
 
-	r1=r1+low;
+	r2=r2-medium;
+
+		}
+};
+
+function o1_e2ClickListener(){
+	if(r1<=r2){
+		e2.destroy();
+
+	r2=r2+medium;
 
 		}
 };
@@ -143,7 +152,23 @@ function o7OverlapHandler(e1,e2){
 		}
 };
 
-function e1ClickListener(){
+function o6_e2ClickListener(){
+	if(r2>=medium){
+		e2.destroy();
+
+		}
+};
+
+function o5_e2ClickListener(){
+	if(r2<=r1){
+		e2.destroy();
+
+	r1=r1+low;
+
+		}
+};
+
+function o2_e1ClickListener(){
 	if(r2>=0){
 		e1.destroy();
 
