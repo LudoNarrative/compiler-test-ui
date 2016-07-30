@@ -50,15 +50,15 @@ function create(){
 	e2.create(grid[gridIdx].x,grid[gridIdx].y,'e2');
 	updateGrid();
 	initEntityProperties(e2);
+
+	};
+
+function update(){
 	addedEntities['e2'].forEach(function(item){
 		item.inputEnabled=true;
 		item.input.enableDrag(true);
 	}, this);
 
-
-	};
-
-function update(){
 	r1=r1-r2;
 
 	r2=r2-high;
