@@ -92,15 +92,14 @@ function create(){
 		initEntityProperties(addedEntities['e3']);
 	}
 
+	addedEntities['e3'].forEach(function(item){item.immovable=true;}, this);
 
-
-
-
-
-	addedEntities['e3'].forEach(function(item){item.immovable=true;}, this);};
+	document.getElementById("r2").innerHTML = "There is no resource 'r2' in this game.";
+};
 
 function update(){
 	r1=r1-low*this.game.time.elapsed/10000.0;
+	document.getElementById("r1").innerHTML = r1;
 
 	game.physics.arcade.overlap(addedEntities['e1'],addedEntities['e2'],o3OverlapHandler,null, this);
 	game.physics.arcade.overlap(addedEntities['e1'],addedEntities['e2'],o1OverlapHandler,null, this);
@@ -149,6 +148,7 @@ function o3OverlapHandler(e1,e2){
 
 	if(game.input.activePointer.leftButton.isDown){
 		r1=r1+medium*this.game.time.elapsed/10000.0;
+		document.getElementById("r1").innerHTML = r1;
 
 		}
 };
@@ -158,7 +158,7 @@ function o1OverlapHandler(e1,e2){
 
 	if(game.input.activePointer.leftButton.isDown){
 		r1=r1-low*this.game.time.elapsed/10000.0;
-
+		document.getElementById("r1").innerHTML = r1;
 		}
 };
 
