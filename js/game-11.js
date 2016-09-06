@@ -48,46 +48,46 @@ function create(){
 	addedEntities['e3']=e3;
 	initEntityProperties(e3);
 	r1=high;
-  document.getElementById("r1").innerHTML = r1;
+	document.getElementById("r1").innerHTML = r1;
 
 	var x=300;var y=50;for (var ii = 0; ii < 2; ii++){
-		x+=(Math.random() * 100)-50;
-		y+=(Math.random() * 100)-50;
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
 		addedEntities['e1'].create(x,y,'e1');
 		updateGrid();
 		initEntityProperties(addedEntities['e1']);
 	}
 	var x=300;var y=250;for (var ii = 0; ii < 2; ii++){
-		x+=(Math.random() * 100)-50;
-		y+=(Math.random() * 100)-50;
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
 		addedEntities['e1'].create(x,y,'e1');
 		updateGrid();
 		initEntityProperties(addedEntities['e1']);
 	}
 	var x=50;var y=50;for (var ii = 0; ii < 2; ii++){
-		x+=(Math.random() * 100)-50;
-		y+=(Math.random() * 100)-50;
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
 		addedEntities['e2'].create(x,y,'e2');
 		updateGrid();
 		initEntityProperties(addedEntities['e2']);
 	}
 	var x=50;var y=250;for (var ii = 0; ii < 2; ii++){
-		x+=(Math.random() * 100)-50;
-		y+=(Math.random() * 100)-50;
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
 		addedEntities['e2'].create(x,y,'e2');
 		updateGrid();
 		initEntityProperties(addedEntities['e2']);
 	}
 	var x=190;var y=50;for (var ii = 0; ii < 10; ii++){
-		x+=(Math.random() * 100)-50;
-		y+=(Math.random() * 100)-50;
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
 		addedEntities['e3'].create(x,y,'e3');
 		updateGrid();
 		initEntityProperties(addedEntities['e3']);
 	}
 	var x=190;var y=250;for (var ii = 0; ii < 10; ii++){
-		x+=(Math.random() * 100)-50;
-		y+=(Math.random() * 100)-50;
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
 		addedEntities['e3'].create(x,y,'e3');
 		updateGrid();
 		initEntityProperties(addedEntities['e3']);
@@ -97,21 +97,20 @@ function create(){
 
 	addedEntities['e3'].forEach(function(item){item.body.immovable=true;}, this);
 
-  document.getElementById("r2").innerHTML = "There is no resource 'r2' in this game.";
+	document.getElementById("r2").innerHTML = "There is no resource 'r2' in this game.";
 };
 
 function update(){
-	for(var k in addedEntities) {
-		if (addedEntities.hasOwnProperty(k)) {
+	for(var k in addedEntities) {if (addedEntities.hasOwnProperty(k)) {
 		var entity = addedEntities[k];
 		entity.forEach(function(item) {
-		item.body.velocity.x *= 0.1;
-		item.body.velocity.y *= 0.1;
+		item.body.velocity.x *= 0.9;
+		item.body.velocity.y *= 0.9;
 		}, this);
 	}}
 
 	r1=r1-low*this.game.time.elapsed/10000.0;
-  document.getElementById("r1").innerHTML = r1;
+	document.getElementById("r1").innerHTML = r1;
 
 	game.physics.arcade.overlap(addedEntities['e1'],addedEntities['e2'],o3OverlapHandler,null, this);
 	game.physics.arcade.overlap(addedEntities['e1'],addedEntities['e2'],o1OverlapHandler,null, this);
@@ -119,8 +118,8 @@ function update(){
 		addedEntities['e1'].forEach(function(item) {
 		var tempPoint = new Phaser.Point(game.input.mousePointer.x-item.x,game.input.mousePointer.y-item.y);
 		tempPoint.normalize();
-		tempPoint.x *= 20;
-		tempPoint.y *= 20;
+		tempPoint.x *= 10;
+		tempPoint.y *= 10;
 		move_towards(item, tempPoint);
 }, this);
 
@@ -158,7 +157,7 @@ function o3OverlapHandler(e1,e2){
 
 	if(game.input.activePointer.leftButton.isDown){
 		r1=r1+medium*this.game.time.elapsed/10000.0;
-    document.getElementById("r1").innerHTML = r1;
+		document.getElementById("r1").innerHTML = r1;
 
 		}
 };
@@ -173,7 +172,7 @@ function o1OverlapHandler(e1,e2){
 
 	if(game.input.activePointer.leftButton.isDown){
 		r1=r1-low*this.game.time.elapsed/10000.0;
-    document.getElementById("r1").innerHTML = r1;
+		document.getElementById("r1").innerHTML = r1;
 
 		}
 };
