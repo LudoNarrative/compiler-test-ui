@@ -20,11 +20,15 @@ var walls;
 var xOffset = 50
 var yOffset = 50
 function preload(){
-	game.load.image('e1','assets/sprites/square.png');
+	//game.load.image('e1','assets/sprites/square.png');
+	game.load.image('e1','assets/sprites/newArt/Triangle/triangleCircleCut.png');
 
-	game.load.image('e2','assets/sprites/circle.png');
+	//game.load.image('e2','assets/sprites/circle.png');
+	game.load.image('e2','assets/sprites/newArt/Triangle/triangleDiagonalLines.png');
 
-	game.load.image('e3','assets/sprites/square.png');
+	//game.load.image('e3','assets/sprites/square.png');
+	game.load.image('e3','assets/sprites/newArt/Triangle/triangleStyled02.png');
+
 };
 
 function create(){
@@ -33,6 +37,7 @@ function create(){
 	gridLinesHorizontal=Math.floor((game.width-1)/gridSize);
 	gridLinesVertical=Math.floor((game.height-1)/gridSize);
 	grid=initGrid();
+
 
     graphics = game.add.graphics( 0,0);
     graphics.beginFill(0x000000);
@@ -48,27 +53,10 @@ function create(){
 	high=11;
 	goals=[];
 
+	setUpWalls();
 
-	walls = game.add.physicsGroup();
-	var wall1 = walls.create(-100+xOffset,yOffset);
-	wall1.width = 100;
-	wall1.height = 1000;
-	var wall2 = walls.create(xOffset,yOffset-100);
-	wall2.width = 4000;
-	wall2.height = 100;
-	var wall3 = walls.create(400+xOffset,yOffset);
-	wall3.width = 100;
-	wall3.height = 3000;
-	var wall4 = walls.create(xOffset,300+yOffset);
-	wall4.width = 4000;
-	wall4.height = 100;
-	wall1.body.immovable = true;
-	wall2.body.immovable = true;
-	wall3.body.immovable = true;
-	wall4.body.immovable = true;
-
-	game.transparent = true;
-	game.stage.backgroundColor = "0x000000";
+	//game.transparent = true;
+	//game.stage.backgroundColor = "0x000000";
 
 	e1=game.add.physicsGroup();
 	addedEntities['e1']=e1;
@@ -298,5 +286,25 @@ function getAspGoals(){
 	if (goals === undefined || goals.length == 0){return ['No ASP goals.'];}
 	else{return goals;}
 };
+
+function setUpWalls(){
+	walls = game.add.physicsGroup();
+	var wall1 = walls.create(-100+xOffset,yOffset);
+	wall1.width = 100;
+	wall1.height = 1000;
+	var wall2 = walls.create(xOffset,yOffset-100);
+	wall2.width = 4000;
+	wall2.height = 100;
+	var wall3 = walls.create(400+xOffset,yOffset);
+	wall3.width = 100;
+	wall3.height = 3000;
+	var wall4 = walls.create(xOffset,300+yOffset);
+	wall4.width = 4000;
+	wall4.height = 100;
+	wall1.body.immovable = true;
+	wall2.body.immovable = true;
+	wall3.body.immovable = true;
+	wall4.body.immovable = true;
+}
 
 goals=['Prevent:[r1] le [0]','Maintain r1'];

@@ -19,11 +19,12 @@
 </div>
 <script src="jquery.js"></script>
 <script src="phaser.js"></script>
-<script src="js/barTest5-11.js"></script>
+<script src="js/5-16-2016Test.js"></script>
+<!--script src="js/game-10-WALLCOLISSIONLOGIC.js"--></script>
 <script>
 var game;
 $( document ).ready(function() {
-  game = new Phaser.Game(400, 300, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update, render: render }, false);
+  game = new Phaser.Game(1000, 1000, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update, render: render }, true);
 
   var goals = getAspGoals();
   for (var i=0; i<goals.length;i++){
@@ -32,7 +33,7 @@ $( document ).ready(function() {
 });
 function restartGame(){
   document.getElementById('gameContainer').innerHTML = "";
-  game = new Phaser.Game(400, 300, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update, render: render}, false);
+  game = new Phaser.Game(500, 500, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update, render: render}, false);
 }
 </script>
 </body>
