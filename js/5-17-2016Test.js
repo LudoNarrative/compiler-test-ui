@@ -14,16 +14,14 @@ var walls;
 var xOffset;
 var yOffset;
 var goals;
-var e1;
-var e2;
-var e3;
-var r1;
+var e_1_XX_;
+var e_2_XX_;
+var r_1_XX_;
+var r_2_XX_;
 function preload(){
-	game.load.image('e1','assets/sprites/square.png');
+	game.load.image('e_1_XX_','assets/sprites/circle.png');
 
-	game.load.image('e2','assets/sprites/triangle.png');
-
-	game.load.image('e3','assets/sprites/square.png');
+	game.load.image('e_2_XX_','assets/sprites/circle.png');
 };
 
 function create(){
@@ -43,99 +41,63 @@ function create(){
 	yOffset=50;
 	goals=[];
 
+	e_1_XX_=game.add.physicsGroup();
+	addedEntities['e_1_XX_']=e_1_XX_;
+	initEntityProperties(e_1_XX_);
+
+	e_2_XX_=game.add.physicsGroup();
+	addedEntities['e_2_XX_']=e_2_XX_;
+	initEntityProperties(e_2_XX_);
+	r_1_XX_=10;
+	r_2_XX_=5;
+
 	graphics = game.add.graphics( 0,0);
 	graphics.beginFill(0x000000);
 	graphics.drawRoundedRect(xOffset,yOffset, 400, 300, 10);
 	graphics.endFill();
 	graphics.alpha = 0.2;
 
-	e1=game.add.physicsGroup();
-	addedEntities['e1']=e1;
-	initEntityProperties(e1);
-
-	e2=game.add.physicsGroup();
-	addedEntities['e2']=e2;
-	initEntityProperties(e2);
-
-	e3=game.add.physicsGroup();
-	addedEntities['e3']=e3;
-	initEntityProperties(e3);
-	r1=11;
-
-
-	var barConfig = {x: 200, y: 100};
-	this.myHealthBar = new HealthBar(this.game, barConfig);
-	this.myHealthBar.setPercent(50); 
-
 	setUpWalls();
 
-	var x=300+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 2; ii++){
+	var x=190+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e1'].create(x,y,'e1');
+		addedEntities['e_1_XX_'].create(x,y,'e_1_XX_');
 		updateGrid();
-		initEntityProperties(addedEntities['e1']);
+		initEntityProperties(addedEntities['e_1_XX_']);
 	}
-	var x=300+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 2; ii++){
+	var x=50+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e1'].create(x,y,'e1');
+		addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');
 		updateGrid();
-		initEntityProperties(addedEntities['e1']);
+		initEntityProperties(addedEntities['e_2_XX_']);
 	}
-	var x=50+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 2; ii++){
+	var x=190+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e2'].create(x,y,'e2');
+		addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');
 		updateGrid();
-		initEntityProperties(addedEntities['e2']);
+		initEntityProperties(addedEntities['e_2_XX_']);
 	}
-	var x=50+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 2; ii++){
+	var x=300+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e2'].create(x,y,'e2');
+		addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');
 		updateGrid();
-		initEntityProperties(addedEntities['e2']);
+		initEntityProperties(addedEntities['e_2_XX_']);
 	}
-	var x=190+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 10; ii++){
-		x+=(Math.random() * 30) - 15;
-		y+=(Math.random() * 30) - 15;
-		addedEntities['e3'].create(x,y,'e3');
-		updateGrid();
-		initEntityProperties(addedEntities['e3']);
-	}
-	var x=190+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 10; ii++){
-		x+=(Math.random() * 30) - 15;
-		y+=(Math.random() * 30) - 15;
-		addedEntities['e3'].create(x,y,'e3');
-		updateGrid();
-		initEntityProperties(addedEntities['e3']);
-	}
+	labels['r_1_XX_'] = 'satiation';
+	labels['e_1_XX_'] = 'food';
+	labels['e_2_XX_'] = 'friend';
+	
+	
+	
+	
+	game.time.events.loop(Phaser.Timer.SECOND*1, o_2_XX__t_1_XX_Listener, this);
 
-
-	text = game.add.text(100 + 10, 100, "HELLO THERE");
-	text.setTextBounds(0,0,100,100);
-	text.anchor.set(0.0);
-	text.align = 'center';
-	//  Font style
-	text.font = 'Arial Black';
-	text.fontSize =14;
-	//text.fontWeight = 'bold';
-	text.fontWeight = 'normal';
-	text.width = 100;
-	//  Stroke color and thickness
-	text.stroke = '#000000';
-	text.strokeThickness = 3;
-	text.fill = '#556b2f';
-	
-	
-	
-	
-	
-	
-	game.time.events.loop(Phaser.Timer.SECOND*2, t1_t1Listener, this);
-
-	addedEntities['e3'].forEach(function(item){item.body.immovable=true;}, this);};
+	game.input.onDown.add(o_3_XX_PressedHandler, this);
+	addedEntities['e_2_XX_'].forEach(function(item){item.body.immovable=true;}, this);};
 
 function update(){
 	for(var k in addedEntities) {if (addedEntities.hasOwnProperty(k)) {
@@ -146,80 +108,94 @@ function update(){
 		}, this);
 	}}
 
-	r1=r1-1*this.game.time.elapsed/10000.0;
+	addedEntities['e_1_XX_'].forEach(function(item){
+		item.inputEnabled=true;
+		item.input.enableDrag(true);
+	}, this);
 
-	if (!game.physics.arcade.overlap(addedEntities['e1'],addedEntities['e2'],null,null, this)){o1NotOverlapHandler();}
-	if(game.input.activePointer.leftButton.isDown){
-		r1=r1+6*this.game.time.elapsed/10000.0;
-
-	addedEntities['e2'].forEach(function(item){item.angle += 10;}, this);
-		}
-
-	if(game.input.activePointer.leftButton.isDown){
-		addedEntities['e1'].forEach(function(item) {
-		var tempPoint = new Phaser.Point(game.input.mousePointer.x-item.x,game.input.mousePointer.y-item.y);
-		tempPoint.normalize();
-		tempPoint.x *= 10;
-		tempPoint.y *= 10;
-		move_towards(item, tempPoint);
-}, this);
+	game.physics.arcade.overlap(addedEntities['e_1_XX_'],addedEntities['e_2_XX_'],o_1_XX_OverlapHandler,null, this);
+	game.physics.arcade.overlap(addedEntities['e_1_XX_'],addedEntities['e_2_XX_'],o_5_XX_OverlapHandler,null, this);
+	if(r_1_XX_<=1){
+		changeMode('narrative_gating');
 
 		}
 
-	if(r1<=0){
-		changeMode('game_loss');
-
-		}
-
-	addedEntities['e2'].forEach(function(item) {
-		move_forward(item,10);
-}, this);
-
-	game.physics.arcade.collide(e1,walls,null,null,this);
-	game.physics.arcade.collide(e2,walls,null,null,this);
-	game.physics.arcade.collide(e3,walls,null,null,this);
-	addedEntities['e1'].forEach(function(item){item.tint=0xff0000;}, this);
-	addedEntities['e2'].forEach(function(item){item.tint=0x0000ff;}, this);
-	game.physics.arcade.collide(e1,e3,null,null,this);
-	game.physics.arcade.collide(e3,e2,null,null,this);
+	game.physics.arcade.collide(e_1_XX_,walls,null,null,this);
+	game.physics.arcade.collide(e_2_XX_,walls,null,null,this);
+	addedEntities['e_1_XX_'].forEach(function(item){item.tint=0xff0000;}, this);
+	addedEntities['e_2_XX_'].forEach(function(item){item.tint=0x0000ff;}, this);
+	game.physics.arcade.collide(e_2_XX_,e_1_XX_,null,null,this);
 	for(var k in addedEntities) {if (addedEntities.hasOwnProperty(k)) {
 		var entity = addedEntities[k];
 		entity.forEach(function(item) {
 		item.body.velocity.clamp(-300,300);
 			if(item.x>game.width){item.x=game.width;}if (item.x<0){item.x=0;} if (item.y>game.height){item.y=game.height;}if (item.y<0){item.y=0;}
-		if(item.deleted){item.destroy();}
+		if(item.deleted){console.log('deleten');item.destroy();}
 		}, this);
 	}}
 
-	//updateProgressBar(r1, 0, labels['r1']);
-	if(r1>10){
-		r1 = 10;
-	}
-	else if(r1 < 0){
-		r1 = 0;
-	}
-	var percent = r1 / 10;
-	percent *= 100;
-
-	console.log(percent);
-	this.myHealthBar.setPercent(percent); 
-
+	updateProgressBar(r_1_XX_, 0, labels['r_1_XX_']);
+	
+	updateProgressBar(r_2_XX_, 1, labels['r_2_XX_']);
 	};
 
 function render(){};
 
-function t1_t1Listener(){
-	r1=11;
+function o_1_XX_OverlapHandler(e1,e2){
+	
+	console.log(r_2_XX_);
+	
+	if(r_2_XX_>=0){
+		r_2_XX_=r_2_XX_-9;
 
-	addedEntities['e2'].forEach(function(item){item.angle += 10;}, this);
+	r_1_XX_=r_1_XX_+8;
+
+	e1.deleted = true
+console.log("HERE");
+		}
+};
+
+function o_2_XX__t_1_XX_Listener(){
+	r_1_XX_=r_1_XX_-3;
+
+	r_2_XX_=r_2_XX_+2;
+
+	var x=50+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
+		addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');
+		updateGrid();
+		initEntityProperties(addedEntities['e_2_XX_']);
+	}
 		
 };
 
-function o1NotOverlapHandler(){
-	if(game.input.activePointer.leftButton.isDown){
-		r1=r1-1*this.game.time.elapsed/10000.0;
+function o_3_XX_PressedHandler(){
+	if(r_2_XX_>=4){
+		r_1_XX_=r_1_XX_+3;
 
+	var x=190+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
+		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
+		updateGrid();
+		//initEntityProperties(addedEntities['e_2_XX_']);
+	}
 		}
+};
+
+function o_5_XX_OverlapHandler(e1,e2){
+	
+	
+	e1.deleted = true
+
+	var x=190+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
+		initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
+		updateGrid();
+	}
+		
 };
 
 function setVariable(varName,value){
@@ -294,7 +270,18 @@ function move_backward(e,amount){
 	e.body.velocity.x += newV.x;
 	e.body.velocity.y += newV.y;
 };
+function initEntity(item){
 
+	item.deleted=false;
+	item.body.collideWorldBounds = true;
+	item.anchor.x = 0.5;
+	item.anchor.y = 0.5;
+	item.rotation = 0;
+	if (!item.body.velocity.hasOwnProperty('x')){item.body.velocity.x=0;}
+	if (!item.body.velocity.hasOwnProperty('y')){item.body.velocity.y=0;}
+	if (!item.body.hasOwnProperty('angularVelocity')){item.body.angularVelocity=0;}
+	
+}
 function initEntityProperties(group){
 	group.forEach(function(item) {
 	item.deleted=false;

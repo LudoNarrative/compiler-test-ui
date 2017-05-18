@@ -62,10 +62,14 @@ function create(){
 	initEntityProperties(e3);
 	r1=11;
 
-
+/*
 	var barConfig = {x: 200, y: 100};
 	this.myHealthBar = new HealthBar(this.game, barConfig);
 	this.myHealthBar.setPercent(50); 
+	*/
+	var barConfig0 = createProgressBarConfig(7,3,"hello")
+	this.myHealthBar0 = new HealthBar(this.game, barConfig0);
+	addBarLabel(barConfig0, 3, "hello");
 
 	setUpWalls();
 
@@ -112,7 +116,7 @@ function create(){
 		initEntityProperties(addedEntities['e3']);
 	}
 
-
+/*
 	text = game.add.text(100 + 10, 100, "HELLO THERE");
 	text.setTextBounds(0,0,100,100);
 	text.anchor.set(0.0);
@@ -127,6 +131,7 @@ function create(){
 	text.stroke = '#000000';
 	text.strokeThickness = 3;
 	text.fill = '#556b2f';
+	*/
 	
 	
 	
@@ -201,9 +206,9 @@ function update(){
 	var percent = r1 / 10;
 	percent *= 100;
 
-	console.log(percent);
-	this.myHealthBar.setPercent(percent); 
-
+	//console.log(percent);
+	//this.myHealthBar.setPercent(percent); 
+	this.myHealthBar0.setPercent(percent);
 	};
 
 function render(){};
@@ -322,6 +327,75 @@ function getAspGoals(){
 	if (goals === undefined || goals.length == 0){return ['No ASP goals.'];}
 	else{return goals;}
 };
+
+function createProgressBarConfig(resourceValue,resourceCount,label){
+	/*console.log('Updating ' + label + ' progress bar for resource number ' + resourceCount + '(' + resourceValue + ')');*/
+	/*Establish some variables for easy tuning*/
+	
+
+	var barConfig = {}
+	var barHeight = 18;
+	var barWidth = 100;
+	barConfig.height = barHeight;
+	barConfig.width = barWidth;
+	barConfig.x = 100 + (10 * resourceCount) + (barWidth * resourceCount);
+	barConfig.y = 10;
+	barConfig.bg = {};
+	barConfig.bg.color = '#ffffff';
+	barConfig.bar = {};
+	barConfig.bar.color = '#ff00ff';
+	return barConfig;
+
+
+
+
+
+	/*Display Label*/
+	/*
+	if(label !== undefined){
+	text = game.add.text(barConfig.x + 10, 0, label);
+	text.setTextBounds(0,0,barWidth,barHeight);
+	text.anchor.set(0.0);
+	text.align = 'center';
+	//  Font style
+	text.font = 'Arial Black';
+	text.fontSize =14;
+	//text.fontWeight = 'bold';
+	text.fontWeight = 'normal';
+	text.width = barWidth;
+	//  Stroke color and thickness
+	text.stroke = '#000000';
+	text.strokeThickness = 3;
+	text.fill = '#556b2f';
+	}
+	*/
+};
+
+function addBarLabel(barConfig, resourceCount, label){
+	var barWidth = 100;
+	var barHeight = 40;
+	//var startX = 10 + (10 * resourceCount) + (barWidth * resourceCount);
+	var startX = barConfig.x;
+	var startY = barConfig.y + 2;
+	console.log("startX: " , startX);
+	console.log("startY: " , startY);
+	if(label !== undefined){
+		text = game.add.text(startX, startY, label);
+		//text.setTextBounds(0,0,barWidth,barHeight);
+		text.anchor.set(0.5,0.5);
+		text.align = 'center';
+		//  Font style
+		text.font = 'Arial Black';
+		text.fontSize =12;
+		//text.fontWeight = 'bold';
+		text.fontWeight = 'normal';
+		text.width = barWidth;
+		//  Stroke color and thickness
+		text.stroke = '#000000';
+		text.strokeThickness = 3;
+		text.fill = '#556b2f';
+	}
+}
 
 function updateProgressBar(resourceValue,resourceCount,label){
 	/*console.log('Updating ' + label + ' progress bar for resource number ' + resourceCount + '(' + resourceValue + ')');*/
