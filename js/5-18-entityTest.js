@@ -62,31 +62,27 @@ function create(){
 	var x=190+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e_1_XX_'].create(x,y,'e_1_XX_');
+		initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
 		updateGrid();
-		initEntityProperties(addedEntities['e_1_XX_']);
-	}
+		}
 	var x=50+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');
+		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
 		updateGrid();
-		initEntityProperties(addedEntities['e_2_XX_']);
-	}
+		}
 	var x=190+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');
+		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
 		updateGrid();
-		initEntityProperties(addedEntities['e_2_XX_']);
-	}
+		}
 	var x=300+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');
+		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
 		updateGrid();
-		initEntityProperties(addedEntities['e_2_XX_']);
-	}
+		}
 	labels['r_1_XX_'] = 'satiation';
 	labels['e_1_XX_'] = 'food';
 	labels['e_2_XX_'] = 'friend';
@@ -97,7 +93,16 @@ function create(){
 	game.time.events.loop(Phaser.Timer.SECOND*1, o_2_XX__t_1_XX_Listener, this);
 
 	game.input.onDown.add(o_3_XX_PressedHandler, this);
-	addedEntities['e_2_XX_'].forEach(function(item){item.body.immovable=true;}, this);};
+	addedEntities['e_2_XX_'].forEach(function(item){item.body.immovable=true;}, this);
+	
+	var barConfig0 = createProgressBarConfig(r_1_XX_, 0, labels['r_1_XX_']);
+	this.resourceBar0 = new HealthBar(this.game, barConfig0)
+	addBarLabel(barConfig0, 0, labels['r_1_XX_']);
+	
+	var barConfig1 = createProgressBarConfig(r_2_XX_, 1, labels['r_2_XX_']);
+	this.resourceBar1 = new HealthBar(this.game, barConfig1)
+	addBarLabel(barConfig1, 1, labels['r_2_XX_']);
+	};
 
 function update(){
 	for(var k in addedEntities) {if (addedEntities.hasOwnProperty(k)) {
@@ -130,20 +135,37 @@ function update(){
 		entity.forEach(function(item) {
 		item.body.velocity.clamp(-300,300);
 			if(item.x>game.width){item.x=game.width;}if (item.x<0){item.x=0;} if (item.y>game.height){item.y=game.height;}if (item.y<0){item.y=0;}
-		if(item.deleted){console.log('deleten');item.destroy();}
+		if(item.deleted){item.destroy();}
 		}, this);
 	}}
 
-	updateProgressBar(r_1_XX_, 0, labels['r_1_XX_']);
+	if(r_1_XX_ > 10){
+		r_1_XX_ = 10;
+	}
+	else if (r_1_XX_ < 0 ){
+		r_1_XX_ = 0;
+	}
 	
-	updateProgressBar(r_2_XX_, 1, labels['r_2_XX_']);
+	if(r_2_XX_ > 10){
+		r_2_XX_ = 10;
+	}
+	else if (r_2_XX_ < 0 ){
+		r_2_XX_ = 0;
+	}
+	
+	var percent0 = r_1_XX_/10;
+	percent0 = percent0 * 100;
+	this.resourceBar0.setPercent(percent0);
+	
+	var percent1 = r_2_XX_/10;
+	percent1 = percent1 * 100;
+	this.resourceBar1.setPercent(percent1);
 	};
 
 function render(){};
 
 function o_1_XX_OverlapHandler(e1,e2){
 	
-	console.log(r_2_XX_);
 	
 	if(r_2_XX_>=0){
 		r_2_XX_=r_2_XX_-9;
@@ -151,7 +173,7 @@ function o_1_XX_OverlapHandler(e1,e2){
 	r_1_XX_=r_1_XX_+8;
 
 	e1.deleted = true
-console.log("HERE");
+
 		}
 };
 
@@ -163,15 +185,9 @@ function o_2_XX__t_1_XX_Listener(){
 	var x=50+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');
-		initEntity(myNewEntity);
+		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
 		updateGrid();
-		//CHANGE INITENTITYPROPERTIES TO INIT ENTITY
-		initEntityProperties(addedEntities['e_2_XX_']);
-		//SO NOT THE ABOVE
-		//BUT THIS: initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
-		//(AND THEN YOU WOULD ALSO BE ABLE TO GET RID OF THIS LINE addedEntities['e_2_XX_'].create(x,y,'e_2_XX_');)
-	}
+		}
 		
 };
 
@@ -184,8 +200,7 @@ function o_3_XX_PressedHandler(){
 		y+=(Math.random() * 30) - 15;
 		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
 		updateGrid();
-		//initEntityProperties(addedEntities['e_2_XX_']);
-	}
+		}
 		}
 };
 
@@ -199,7 +214,7 @@ function o_5_XX_OverlapHandler(e1,e2){
 		y+=(Math.random() * 30) - 15;
 		initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
 		updateGrid();
-	}
+		}
 		
 };
 
@@ -275,17 +290,7 @@ function move_backward(e,amount){
 	e.body.velocity.x += newV.x;
 	e.body.velocity.y += newV.y;
 };
-function initEntity(item){
 
-	item.deleted=false;
-	item.body.collideWorldBounds = true;
-	item.anchor.x = 0.5;
-	item.anchor.y = 0.5;
-	item.rotation = 0;
-	if (!item.body.velocity.hasOwnProperty('x')){item.body.velocity.x=0;}
-	if (!item.body.velocity.hasOwnProperty('y')){item.body.velocity.y=0;}
-	if (!item.body.hasOwnProperty('angularVelocity')){item.body.angularVelocity=0;}
-}
 function initEntityProperties(group){
 	group.forEach(function(item) {
 	item.deleted=false;
@@ -297,6 +302,17 @@ function initEntityProperties(group){
 	if (!item.body.velocity.hasOwnProperty('y')){item.body.velocity.y=0;}
 	if (!item.body.hasOwnProperty('angularVelocity')){item.body.angularVelocity=0;}
 	}, this);
+};
+
+function initEntity(item){
+	item.deleted=false;
+	item.body.collideWorldBounds = true;
+	item.anchor.x = 0.5;
+	item.anchor.y = 0.5;
+	item.rotation = 0;
+	if (!item.body.velocity.hasOwnProperty('x')){item.body.velocity.x=0;}
+	if (!item.body.velocity.hasOwnProperty('y')){item.body.velocity.y=0;}
+	if (!item.body.hasOwnProperty('angularVelocity')){item.body.angularVelocity=0;}
 };
 
 function changeMode(newMode){
@@ -312,61 +328,6 @@ function displayText(t){
 function getAspGoals(){
 	if (goals === undefined || goals.length == 0){return ['No ASP goals.'];}
 	else{return goals;}
-};
-
-function updateProgressBar(resourceValue,resourceCount,label){
-	/*console.log('Updating ' + label + ' progress bar for resource number ' + resourceCount + '(' + resourceValue + ')');*/
-	/*Establish some variables for easy tuning*/
-	var barHeight = 18;
-	var barWidth  = 100;
-	var startX = 10 + (10 * resourceCount) + (barWidth * resourceCount);
-	var startY = 10;
-	var maxBarColor = '#ffffff';
-	var currentBarColor = '#ff00ff'
-	if(resourceCount === 0) {currentBarColor = '#ff0000'} else if(resourceCount === 1) {currentBarColor = '#00ff00';} else if(resourceCount === 2){currentBarColor = '#0000ff';}
-	/*console.log('here is barColor: ' , currentBarColor);*/
-	/*Draw the 'max' bar to the screen*/
-	var resourceMaxBar;
-	var maxBarWidth = barWidth;
-	var maxBarHeight = barHeight;
-	var maxBarBitmapData = game.add.bitmapData(maxBarWidth,maxBarHeight);
-	maxBarBitmapData.ctx.beginPath();
-	maxBarBitmapData.boundsPadding = 0;
-	maxBarBitmapData.ctx.rect(0,0,maxBarWidth,maxBarHeight);
-	maxBarBitmapData.ctx.fillStyle = maxBarColor;
-	maxBarBitmapData.ctx.fill();
-	resourceMaxBar = game.add.sprite(startX,startY,maxBarBitmapData);
-	resourceMaxBar.anchor.setTo(0.0,0.5);
-	/*Draw the 'current' bar to the screen*/
-	var resourceCurrentBar;
-	var currentBarWidth = resourceValue * 10;
-	if(currentBarWidth > 100) {currentBarWidth = 100;} else if(currentBarWidth < 0){ currentBarWidth = 0;}
-	var currentBarHeight = barHeight
-	var currentBarBitmapData = game.add.bitmapData(currentBarWidth,currentBarHeight);
-	currentBarBitmapData.ctx.beginPath();
-	currentBarBitmapData.boundsPadding = 0;
-	currentBarBitmapData.ctx.rect(0,0,currentBarWidth,currentBarHeight);
-	currentBarBitmapData.ctx.fillStyle = currentBarColor;
-	currentBarBitmapData.ctx.fill();
-	resourceCurrentBar = game.add.sprite(startX,startY,currentBarBitmapData);
-	resourceCurrentBar.anchor.setTo(0.0, 0.5);
-	/*Display Label*/
-	if(label !== undefined){
-	text = game.add.text(startX + 10, 0, label);
-	text.setTextBounds(0,0,barWidth,barHeight);
-	text.anchor.set(0.0);
-	text.align = 'center';
-	//  Font style
-	text.font = 'Arial Black';
-	text.fontSize =14;
-	//text.fontWeight = 'bold';
-	text.fontWeight = 'normal';
-	text.width = barWidth;
-	//  Stroke color and thickness
-	text.stroke = '#000000';
-	text.strokeThickness = 3;
-	text.fill = '#556b2f';
-	}
 };
 
 function setUpWalls(){
@@ -387,6 +348,42 @@ function setUpWalls(){
 	wall2.body.immovable = true;
 	wall3.body.immovable = true;
 	wall4.body.immovable = true;
+};
+
+function createProgressBarConfig(resourceValue,resourceCount,label){
+	var barConfig = {};
+	var barHeight = 18;
+	var barWidth = 100;
+	barConfig.height = barHeight;
+	barConfig.width = barWidth;
+	barConfig.x = 100 + (10 * resourceCount) + (barWidth * resourceCount);
+	barConfig.y = 10;
+	barConfig.bg = {};
+	barConfig.bg.color = '#ffffff';
+	barConfig.bar = {};
+	barConfig.bar.color = '#ff00ff';
+	return barConfig;
+};
+
+function addBarLabel(barConfig,resourceCount,label){
+	var barWidth = 100;
+	var barHeight = 40;
+	var startX = barConfig.x;
+	var startY = barConfig.y + 2;
+	if(label !== undefined){
+	  text = game.add.text(startX, startY, label);
+	  text.anchor.set(0.5,0.5);
+	  text.align = 'center';
+	  //  Font style
+	  text.font = 'Arial Black';
+	  text.fontSize =12;
+	  text.fontWeight = 'normal';
+	  text.width = barWidth;
+	  //  Stroke color and thickness
+	  text.stroke = '#000000';
+	  text.strokeThickness = 3;
+	  text.fill = '#556b2f';
+	}
 };
 
 
