@@ -47,7 +47,7 @@ function create(){
 	e_2_XX_=game.add.physicsGroup();
 	addedEntities['e_2_XX_']=e_2_XX_;
 	initEntityProperties(e_2_XX_);
-	r_1_XX_=9;
+	r_1_XX_=8;
 
 	graphics = game.add.graphics( 0,0);
 	graphics.beginFill(0x000000);
@@ -63,13 +63,19 @@ function create(){
 		initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
 		updateGrid();
 		}
-	var x=50+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
+	var x=50+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
 		initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
 		updateGrid();
 		}
-	var x=300+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
+	var x=300+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
+		initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
+		updateGrid();
+		}
+	var x=190+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
 		initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
@@ -88,9 +94,10 @@ function create(){
 	
 	
 	
-	game.time.events.loop(Phaser.Timer.SECOND*3, o_3_XX__t_1_XX_Listener, this);
+	
+	game.time.events.loop(Phaser.Timer.SECOND*2, o_4_XX__t_1_XX_Listener, this);
 
-	game.time.events.loop(Phaser.Timer.SECOND*4, wander_entity_e_2_XX__XX__XX__wander_entity_e_2_XX__XX__XX_Listener, this);
+	game.time.events.loop(Phaser.Timer.SECOND*3, wander_entity_e_2_XX__XX__XX__wander_entity_e_2_XX__XX__XX_Listener, this);
 
 	
 	var barConfig0 = createProgressBarConfig(r_1_XX_, 0, labels['r_1_XX_']);
@@ -109,23 +116,32 @@ function update(){
 
 	addedEntities['e_1_XX_'].forEach(function(item){
 		item.inputEnabled=true;
-		item.input.enableDrag(true);
+		item.events.onInputDown.add(o_1_XX__e_1_XX_ClickListener,this);
 	}, this);
 
-	game.physics.arcade.overlap(addedEntities['e_1_XX_'],addedEntities['e_2_XX_'],o_2_XX_OverlapHandler,null, this);
+	game.physics.arcade.overlap(addedEntities['e_1_XX_'],addedEntities['e_2_XX_'],o_3_XX_OverlapHandler,null, this);
 	if(r_1_XX_<=0){
 		changeMode('game_loss');
 
 		}
 
 	addedEntities['e_2_XX_'].forEach(function(item) {
-		move_forward(item,4);
+		move_forward(item,2);
+}, this);
+
+	addedEntities['e_1_XX_'].forEach(function(item) {
+		var tempPoint = new Phaser.Point(game.input.mousePointer.x-item.x,game.input.mousePointer.y-item.y);
+		tempPoint.normalize();
+		tempPoint.x *= 10;
+		tempPoint.y *= 10;
+		move_away(item, tempPoint);
 }, this);
 
 	game.physics.arcade.collide(e_1_XX_,walls,null,null,this);
 	game.physics.arcade.collide(e_2_XX_,walls,null,null,this);
 	addedEntities['e_2_XX_'].forEach(function(item){item.tint=0xff0000;}, this);
-	addedEntities['e_1_XX_'].forEach(function(item){item.tint=0x00ff00;}, this);
+	addedEntities['e_1_XX_'].forEach(function(item){item.tint=0x0000ff;}, this);
+	game.physics.arcade.collide(e_1_XX_,e_1_XX_,null,null,this);
 	for(var k in addedEntities) {if (addedEntities.hasOwnProperty(k)) {
 		var entity = addedEntities[k];
 		entity.forEach(function(item) {
@@ -149,34 +165,28 @@ function update(){
 
 function render(){};
 
-function o_2_XX_OverlapHandler(e1,e2){
-	
-	
-	r_1_XX_=r_1_XX_+1;
+function o_1_XX__e_1_XX_ClickListener(){
+	r_1_XX_=r_1_XX_-1/2;
 
-	
-	if (e1.key === 'e_2_XX_'){
-		e1.deleted = true;
-	}
-	if (e2.key === 'e_2_XX_'){
-		e2.deleted = true;
-	}
+		
 };
 
-function o_3_XX__t_1_XX_Listener(){
-	var x=190+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
-		x+=(Math.random() * 30) - 15;
-		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
-		updateGrid();
-		}
+function o_3_XX_OverlapHandler(e1,e2){
+	
+	
+	r_1_XX_=r_1_XX_+1*this.game.time.elapsed/1000.0;
+
+		
+};
+
+function o_4_XX__t_1_XX_Listener(){
+	r_1_XX_=r_1_XX_-1/2;
+
 		
 };
 
 function wander_entity_e_2_XX__XX__XX__wander_entity_e_2_XX__XX__XX_Listener(){
-	addedEntities['e_2_XX_'].forEach(function(item){item.angle = Math.random() * (null-null) + null;}, this);
-	r_1_XX_=r_1_XX_-4;
-
+	addedEntities['e_2_XX_'].forEach(function(item){item.angle = Math.random() * (360-0) + 0;}, this);
 		
 };
 
@@ -279,7 +289,7 @@ function initEntity(item){
 
 function changeMode(newMode){
 	if(newMode==='game_win'){mode = 'win'; game.world.removeAll(); displayText('CLEARED');}
-	else if(newMode==='game_loss'){mode='loss'; game.stage.backgroundColor = '#400';}
+	else if(newMode==='game_loss'){mode='loss'; game.stage.backgroundColor = '#400'; displayText('(Loss State Reached)');}
 };
 
 function displayText(t){
