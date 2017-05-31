@@ -13,11 +13,11 @@ var high;
 var walls;
 var xOffset;
 var yOffset;
+var lossTextDisplayed;
 var goals;
 var e_1_XX_;
 var e_2_XX_;
 var r_1_XX_;
-var lossTextDisplayed;
 function preload(){
 	game.load.image('e_1_XX_','assets/sprites/circle.png');
 
@@ -39,7 +39,7 @@ function create(){
 	high=11;
 	xOffset=50;
 	yOffset=50;
-	lossTextDisplayed = false;
+	lossTextDisplayed=false;
 	goals=[];
 
 	e_1_XX_=game.add.physicsGroup();
@@ -105,6 +105,10 @@ function create(){
 	var barConfig0 = createProgressBarConfig(r_1_XX_, 0, labels['r_1_XX_']);
 	this.resourceBar0 = new HealthBar(this.game, barConfig0)
 	addBarLabel(barConfig0, 0, labels['r_1_XX_']);
+	
+	var percent0 = r_1_XX_/10;
+	percent0 = percent0 * 100;
+	this.resourceBar0.setPercent(percent0);
 	};
 
 function update(){
@@ -176,7 +180,7 @@ function o_1_XX__e_1_XX_ClickListener(){
 function o_3_XX_OverlapHandler(e1,e2){
 	
 	
-	r_1_XX_=r_1_XX_+1*this.game.time.elapsed/1000.0;
+	r_1_XX_=r_1_XX_+1*this.game.time.elapsed/3840.0;
 
 		
 };
@@ -290,14 +294,18 @@ function initEntity(item){
 };
 
 function changeMode(newMode){
-	if(newMode==='game_win'){mode = 'win'; game.world.removeAll(); displayText('CLEARED');}
-	else if(newMode==='game_loss'){mode='loss'; game.stage.backgroundColor = '#400'; ; 
-
-	if(!lossTextDisplayed){
-		console.log("JUSST CURIOUS")
-		displayText('(Loss State Reached)');
-		lossTextDisplayed = true;
+	if(newMode==='game_win'){
+	 mode = 'win';
+	 game.world.removeAll();
+	 displayText('CLEARED');
 	}
+	else if(newMode==='game_loss'){
+	 mode='loss';
+	 game.stage.backgroundColor = '#400';
+	 if(!lossTextDisplayed){
+	   displayText('(Loss State Reached)');
+	   lossTextDisplayed=true
+	 }
 	}
 };
 
@@ -363,7 +371,7 @@ function addBarLabel(barConfig,resourceCount,label){
 	  //  Stroke color and thickness
 	  text.stroke = '#000000';
 	  text.strokeThickness = 3;
-	  text.fill = '#556b2f';
+	  text.fill = '#000000';
 	}
 };
 
