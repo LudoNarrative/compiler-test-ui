@@ -16,8 +16,6 @@ var yOffset;
 var lossTextDisplayed;
 var goals;
 var e1;
-var e2;
-var r1;
 function preload(){
 	game.load.image('e1','assets/sprites/circle.png');
 };
@@ -44,11 +42,6 @@ function create(){
 	addedEntities['e1']=e1;
 	initEntityProperties(e1);
 
-	e2=game.add.physicsGroup();
-	addedEntities['e2']=e2;
-	initEntityProperties(e2);
-	r1=0;
-
 	graphics = game.add.graphics( 0,0);
 	graphics.beginFill(0x000000);
 	graphics.drawRoundedRect(xOffset,yOffset, 400, 300, 10);
@@ -64,14 +57,6 @@ function create(){
 		updateGrid();
 		}
 	
-	
-	var barConfig0 = createProgressBarConfig(r1, 0, labels['r1']);
-	this.resourceBar0 = new HealthBar(this.game, barConfig0)
-	addBarLabel(barConfig0, 0, labels['r1']);
-	
-	var percent0 = r1/10;
-	percent0 = percent0 * 100;
-	this.resourceBar0.setPercentNow(percent0);
 	};
 
 function update(){
@@ -83,20 +68,12 @@ function update(){
 		}, this);
 	}}
 
-	addedEntities['e1'].forEach(function(item){item.health = item.health-1;}, this);
-	if(r1>=40){
-		addedEntities['e_1_XX_'].forEach(function(item) {
-		var tempPoint = new Phaser.Point(game.input.mousePointer.x-item.x,game.input.mousePointer.y-item.y);
-		tempPoint.normalize();
-		tempPoint.x *= 10;
-		tempPoint.y *= 10;
-		move_away(item, tempPoint);
-}, this);
-
-		}
+	addedEntities['e1'].forEach(function(item){
+		item.inputEnabled=true;
+		item.events.onInputDown.add(o1_e1ClickListener,this);
+	}, this);
 
 	game.physics.arcade.collide(e1,walls,null,null,this);
-	game.physics.arcade.collide(e2,walls,null,null,this);
 	addedEntities['e1'].forEach(function(item){item.tint=0x00ff00;}, this);
 	for(var k in addedEntities) {if (addedEntities.hasOwnProperty(k)) {
 		var entity = addedEntities[k];
@@ -107,21 +84,18 @@ function update(){
 		}, this);
 	}}
 
-	if(r1 > 10){
-		r1 = 10;
-	}
-	else if (r1 < 0 ){
-		r1 = 0;
-	}
-	
-	var percent0 = r1/10;
-	percent0 = percent0 * 100;
-	this.resourceBar0.setPercent(percent0);
-	
 	markZeroHealthEntitiesForDeletion();
 	};
 
 function render(){};
+
+function o1_e1ClickListener(clickedOnObject,pointer){
+	
+	
+	clickedOnObject.health=clickedOnObject.health-10/2
+	console.log(clickedOnObject.health)
+		
+};
 
 function setVariable(varName,value){
 	variables[varName]=value;
