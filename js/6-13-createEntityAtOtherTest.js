@@ -19,12 +19,13 @@ var e_1_XX_;
 var e_2_XX_;
 var e_3_XX_;
 var r_1_XX_;
+var r_2_XX_;
 function preload(){
-	game.load.image('e_1_XX_','assets/sprites/newArt/Circle/Circle_Outlined_GradientSwirl2.png');
+	game.load.image('e_1_XX_','assets/sprites/circle.png');
 
-	game.load.image('e_2_XX_','assets/sprites/newArt/Circle/Circle_Swirl_NegativeSpace.png');
+	game.load.image('e_2_XX_','assets/sprites/circle.png');
 
-	game.load.image('e_3_XX_','assets/sprites/newArt/Circle/Circle_outergradient.png');
+	game.load.image('e_3_XX_','assets/sprites/circle.png');
 };
 
 function create(){
@@ -56,7 +57,8 @@ function create(){
 	e_3_XX_=game.add.physicsGroup();
 	addedEntities['e_3_XX_']=e_3_XX_;
 	initEntityProperties(e_3_XX_);
-	r_1_XX_=8;
+	r_1_XX_=7;
+	r_2_XX_=0;
 
 	graphics = game.add.graphics( 0,0);
 	graphics.beginFill(0x000000);
@@ -69,59 +71,68 @@ function create(){
 	var x=190+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
-		updateGrid();
+		
+		if(addedEntities['e_1_XX_'].length < 20){
+			initEntity(addedEntities['e_1_XX_'].create(x,y,'e_1_XX_'));
+			updateGrid();
 		}
-	var x=50+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
-		x+=(Math.random() * 30) - 15;
-		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
-		updateGrid();
-		}
-	var x=300+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
-		x+=(Math.random() * 30) - 15;
-		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
-		updateGrid();
-		}
-	var x=50+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
-		x+=(Math.random() * 30) - 15;
-		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
-		updateGrid();
-		}
-	var x=300+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
-		x+=(Math.random() * 30) - 15;
-		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
-		updateGrid();
 		}
 	var x=190+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
-		updateGrid();
+		
+		if(addedEntities['e_2_XX_'].length < 20){
+			initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
+			updateGrid();
 		}
-	var x=50+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
+		}
+	var x=50+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
-		updateGrid();
+		
+		if(addedEntities['e_2_XX_'].length < 20){
+			initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
+			updateGrid();
 		}
-	var x=300+ xOffset;var y=160+ yOffset;for (var ii = 0; ii < 1; ii++){
+		}
+	var x=300+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
-		updateGrid();
+		
+		if(addedEntities['e_2_XX_'].length < 20){
+			initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
+			updateGrid();
+		}
+		}
+	var x=50+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
+		
+		if(addedEntities['e_3_XX_'].length < 20){
+			initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
+			updateGrid();
+		}
+		}
+	var x=300+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
+		x+=(Math.random() * 30) - 15;
+		y+=(Math.random() * 30) - 15;
+		
+		if(addedEntities['e_3_XX_'].length < 20){
+			initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
+			updateGrid();
+		}
 		}
 	var x=190+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
-		updateGrid();
+		
+		if(addedEntities['e_3_XX_'].length < 20){
+			initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
+			updateGrid();
+		}
 		}
 	labels['r_1_XX_'] = 'composure';
-	labels['r'] = 'tension';
+	labels['r_2_XX_'] = 'tension';
 	labels['e_1_XX_'] = 'yourself';
 	labels['e_2_XX_'] = 'help';
 	labels['e_3_XX_'] = 'harm';
@@ -133,10 +144,6 @@ function create(){
 	
 	
 	
-	
-	game.time.events.loop(Phaser.Timer.SECOND*4, pingpong_entity_e_1_XX__XX__XX__pingpong_entity_e_1_XX__XX__XX_Listener, this);
-
-	
 	var barConfig0 = createProgressBarConfig(r_1_XX_, 0, labels['r_1_XX_']);
 	this.resourceBar0 = new HealthBar(this.game, barConfig0)
 	addBarLabel(barConfig0, 0, labels['r_1_XX_']);
@@ -144,6 +151,14 @@ function create(){
 	var percent0 = r_1_XX_/10;
 	percent0 = percent0 * 100;
 	this.resourceBar0.setPercentNow(percent0);
+	
+	var barConfig1 = createProgressBarConfig(r_2_XX_, 1, labels['r_2_XX_']);
+	this.resourceBar1 = new HealthBar(this.game, barConfig1)
+	addBarLabel(barConfig1, 1, labels['r_2_XX_']);
+	
+	var percent1 = r_2_XX_/10;
+	percent1 = percent1 * 100;
+	this.resourceBar1.setPercentNow(percent1);
 	};
 
 function update(){
@@ -155,50 +170,26 @@ function update(){
 		}, this);
 	}}
 
-	addedEntities['e_1_XX_'].forEach(function(item){item.health = item.health-1/40;}, this);
-	addedEntities['e_3_XX_'].forEach(function(item){item.health = item.health-7/40;}, this);
-	addedEntities['e_1_XX_'].forEach(function(item){item.health = item.health+3/40;}, this);
-	addedEntities['e_3_XX_'].forEach(function(item){item.health = item.health+5/40;}, this);
-	r_1_XX_=r_1_XX_+1/40;
+	addedEntities['e_1_XX_'].forEach(function(item){
+		item.inputEnabled=true;
+		item.input.enableDrag(true);
+	}, this);
 
-	game.physics.arcade.overlap(addedEntities['e_1_XX_'],addedEntities['e_2_XX_'],o_2_XX_OverlapHandler,null, this);
-	game.physics.arcade.overlap(addedEntities['e_1_XX_'],addedEntities['e_3_XX_'],o_3_XX_OverlapHandler,null, this);
-	if(r_1_XX_<=0){
-		changeMode('narrative_progress');
+	r_1_XX_=r_1_XX_-1/40;
 
-		}
-
-	if(game.input.activePointer.leftButton.isDown){
-		addedEntities['e_2_XX_'].forEach(function(item){item.health = item.health-3/40;}, this);
-		//Make all instances of e_1_XX_look at an instance of cursor using choice parameter: nearest
-		var targetItem = {};
-		targetItem.x = game.input.mousePointer.x;
-		targetItem.y = game.input.mousePointer.y;
-		addedEntities['e_1_XX_'].forEach(function(lookerItem) {
-			var newAngle = Math.atan2(targetItem.y - lookerItem.y, targetItem.x - lookerItem.x);
-			newAngle = newAngle * (180/Math.PI); //convert from radians to degrees.
-			lookerItem.angle = newAngle;
-		},this);
-	addedEntities['e_1_XX_'].forEach(function(item) {
-		move_left(item,3);
-}, this);
+	if (!game.physics.arcade.overlap(addedEntities['e_1_XX_'],addedEntities['e_2_XX_'],null,null, this)){o_1_XX_NotOverlapHandler();}
+	game.physics.arcade.overlap(addedEntities['e_1_XX_'],addedEntities['e_3_XX_'],o_2_XX_OverlapHandler,null, this);
+	if(r_1_XX_<=4){
+		changeMode('narrative_gating');
 
 		}
-
-	addedEntities['e_1_XX_'].forEach(function(item) {
-		move_forward(item,3);
-}, this);
 
 	addedEntities['e_2_XX_'].forEach(function(item) {
-		move_forward(item,3);
+		move_forward(item,2);
 }, this);
 
 	addedEntities['e_3_XX_'].forEach(function(item) {
-		move_forward(item,4);
-}, this);
-
-	addedEntities['e_1_XX_'].forEach(function(item) {
-		move_backward(item,3);
+		move_forward(item,2);
 }, this);
 
 	game.physics.arcade.collide(e_1_XX_,walls,null,null,this);
@@ -210,7 +201,7 @@ function update(){
 	game.physics.arcade.collide(e_2_XX_,e_2_XX_,null,null,this);
 	game.physics.arcade.collide(e_1_XX_,e_1_XX_,null,null,this);
 	game.physics.arcade.collide(e_3_XX_,e_3_XX_,null,null,this);
-		//Make all instances of e_3_XX_look at an instance of e_1_XX_ using choice parameter: nearest
+		//Make all instances of e_3_XX_look at an instance of e_1_XX_ using choice parameter: furthest
 		addedEntities['e_3_XX_'].forEach(function(lookerItem) {
 			var curBestDistance = undefined;
 			var curBestIndex = -1;
@@ -218,7 +209,7 @@ function update(){
 			addedEntities['e_1_XX_'].forEach(function(lookedAtItem){
 				var distance = Phaser.Math.distance(lookerItem.x, lookerItem.y, lookedAtItem.x, lookedAtItem.y);
 				var index;
-				if(curBestDistance === undefined || curBestDistance > distance){
+				if(curBestDistance === undefined || curBestDistance < distance){
 					curBestIndex = curIndex;
 					curBestDistance = distance;
 				}
@@ -229,7 +220,7 @@ function update(){
 			newAngle = newAngle * (180/Math.PI); //convert from radians to degrees.
 			lookerItem.angle = newAngle;
 		},this);
-		//Make all instances of e_2_XX_look at an instance of e_1_XX_ using choice parameter: nearest
+		//Make all instances of e_2_XX_look at an instance of e_1_XX_ using choice parameter: furthest
 		addedEntities['e_2_XX_'].forEach(function(lookerItem) {
 			var curBestDistance = undefined;
 			var curBestIndex = -1;
@@ -237,24 +228,13 @@ function update(){
 			addedEntities['e_1_XX_'].forEach(function(lookedAtItem){
 				var distance = Phaser.Math.distance(lookerItem.x, lookerItem.y, lookedAtItem.x, lookedAtItem.y);
 				var index;
-				if(curBestDistance === undefined || curBestDistance > distance){
+				if(curBestDistance === undefined || curBestDistance < distance){
 					curBestIndex = curIndex;
 					curBestDistance = distance;
 				}
 				curIndex += 1;
 			},this);
 			var targetItem = addedEntities['e_1_XX_'].children[curBestIndex];
-			var newAngle = Math.atan2(targetItem.y - lookerItem.y, targetItem.x - lookerItem.x);
-			newAngle = newAngle * (180/Math.PI); //convert from radians to degrees.
-			lookerItem.angle = newAngle;
-		},this);
-		//Make all instances of e_1_XX_look at an instance of e_2_XX_ using choice parameter: random
-		addedEntities['e_1_XX_'].forEach(function(lookerItem) {
-			var curBestDistance = undefined;
-			var curBestIndex = -1;
-			var curIndex = 0;
-			curBestIndex = Math.floor(Math.random() * (addedEntities['e_2_XX_'].length));
-			var targetItem = addedEntities['e_2_XX_'].children[curBestIndex];
 			var newAngle = Math.atan2(targetItem.y - lookerItem.y, targetItem.x - lookerItem.x);
 			newAngle = newAngle * (180/Math.PI); //convert from radians to degrees.
 			lookerItem.angle = newAngle;
@@ -275,50 +255,53 @@ function update(){
 		r_1_XX_ = 0;
 	}
 	
+	if(r_2_XX_ > 10){
+		r_2_XX_ = 10;
+	}
+	else if (r_2_XX_ < 0 ){
+		r_2_XX_ = 0;
+	}
+	
 	var percent0 = r_1_XX_/10;
 	percent0 = percent0 * 100;
 	this.resourceBar0.setPercent(percent0);
+	
+	var percent1 = r_2_XX_/10;
+	percent1 = percent1 * 100;
+	this.resourceBar1.setPercent(percent1);
 	
 	markZeroHealthEntitiesForDeletion();
 	};
 
 function render(){};
 
-function o_2_XX_OverlapHandler(e1,e2){
-	console.log("o2 Overlap Handler!")
+function o_1_XX_NotOverlapHandler(){
 	
-	r_1_XX_=r_1_XX_+3/2;
+	if (typeof e1 !== 'undefined' && e1.key === 'e_1_XX_'){
+		e1.health = e1.health+7/40;
+	}
+	if (typeof e2 !== 'undefined' && e2.key === 'e_1_XX_'){
+		e2.health = e2.health+7/40;
+	}
 
-	var x=190+ xOffset;var y=250+ yOffset;for (var ii = 0; ii < 1; ii++){
-		x+=(Math.random() * 30) - 15;
-		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
-		updateGrid();
-		}
-	
-	if (typeof e1 !== 'undefined' && e1.key === 'e_2_XX_'){
-		e1.deleted = true;
-	}
-	if (typeof e2 !== 'undefined' && e2.key === 'e_2_XX_'){
-		e2.deleted = true;
-	}
-	if (typeof clickedOnObject !== 'undefined'){
-		clickedOnObject.deleted = true;
-	}
+	r_1_XX_=r_1_XX_+1/40;
 
 		
 };
 
-function o_3_XX_OverlapHandler(e1,e2){
-	console.log("o3 Overlap Handler!")
+function o_2_XX_OverlapHandler(e1,e2){
 	
-	r_1_XX_=r_1_XX_-5/2;
+	
+	r_1_XX_=r_1_XX_+1/2;
 
-	var x=50+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
+	var x=300+ xOffset;var y=50+ yOffset;for (var ii = 0; ii < 1; ii++){
 		x+=(Math.random() * 30) - 15;
 		y+=(Math.random() * 30) - 15;
-		initEntity(addedEntities['e_2_XX_'].create(x,y,'e_2_XX_'));
-		updateGrid();
+		
+		if(addedEntities['e_3_XX_'].length < 20){
+			initEntity(addedEntities['e_3_XX_'].create(x,y,'e_3_XX_'));
+			updateGrid();
+		}
 		}
 	
 	if (typeof e1 !== 'undefined' && e1.key === 'e_3_XX_'){
@@ -331,11 +314,6 @@ function o_3_XX_OverlapHandler(e1,e2){
 		clickedOnObject.deleted = true;
 	}
 
-		
-};
-
-function pingpong_entity_e_1_XX__XX__XX__pingpong_entity_e_1_XX__XX__XX_Listener(){
-	addedEntities['e_1_XX_'].forEach(function(item){item.angle += 180;}, this);
 		
 };
 
