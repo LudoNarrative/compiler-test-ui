@@ -23,10 +23,28 @@
 <!--script src="js/5-16-2016Test-NEWHealthBar.js"></script-->
 <!--script src="js/bugFixing5-26.js"></script-->
 <!--script src="js/6-1-resourceBarText.js"></script-->
-<script src="js/6-13-createEntityAtOtherTest.js"></script>
+<script src="js/6-16-variableUpdateTesting2.js"></script>
 <!--script src="js/game-10-WALLCOLISSIONLOGIC.js"--></script>
 <script>
 var game;
+var State = {'debugMode' : true};
+State.get = function(variableName){
+    return this[variableName];
+  };
+State.set = function(varName, varValue){
+  console.log("calling DEBUG State.set")
+};
+var Display = {}
+Display.setAvatar = function(State){
+  console.log("calling DEBUG setAvatar")
+}
+Display.setStats = function(storyStats){
+  console.log("Calling DEBUG setStats")
+}
+var StoryAssembler = {};
+StoryAssembler.refreshNarrative = function(){
+  console.log("StoryAssembler.refreshNarrative called in test framework.")
+}
 $( document ).ready(function() {
   game = new Phaser.Game(1000, 1000, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update, render: render }, true);
 
