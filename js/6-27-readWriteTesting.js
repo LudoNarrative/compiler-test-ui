@@ -285,7 +285,7 @@ function o_5_XX__e_1_XX_ClickListener(clickedOnObject,pointer){
 function setVariable(varName,value){
 	variables[varName]=value;
 	//State.set(varName, value.toFixed(1));
-	console.log('setting varName: ' , varName , ' to ' , value);
+	//console.log('setting varName: ' , varName , ' to ' , value);
 	State.set(varName, value);
 	Display.setAvatars(State);
 	Display.setStats('storyStats');

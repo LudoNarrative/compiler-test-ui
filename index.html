@@ -23,8 +23,9 @@
 <!--script src="js/5-16-2016Test-NEWHealthBar.js"></script-->
 <!--script src="js/bugFixing5-26.js"></script-->
 <!--script src="js/6-1-resourceBarText.js"></script-->
-<script src="js/6-16-variableUpdateTesting2.js"></script>
-<!--script src="js/game-10-WALLCOLISSIONLOGIC.js"--></script>
+<!--script src="js/6-16-variableUpdateTesting2.js"></script-->
+<!--script src="js/game-10-WALLCOLISSIONLOGIC.js"></script-->
+<script src="js/6-27-readWriteTesting.js"></script>
 <script>
 var game;
 var State = {'debugMode' : true};
@@ -35,8 +36,8 @@ State.set = function(varName, varValue){
   console.log("calling DEBUG State.set")
 };
 var Display = {}
-Display.setAvatar = function(State){
-  console.log("calling DEBUG setAvatar")
+Display.setAvatars = function(State){
+  console.log("calling DEBUG setAvatars")
 }
 Display.setStats = function(storyStats){
   console.log("Calling DEBUG setStats")
