@@ -115,10 +115,10 @@ function create(){
 			updateGrid();
 		}
 		}
-	labels['r_1_XX_'] = {};labels['r_1_XX_'].name = 'satiation';labels['r_1_XX_'].variable = 'r_1_XX_';labels['r_1_XX_'].readWrite = 'write';
-	labels['e_1_XX_'] = {};labels['e_1_XX_'].name = 'food';labels['e_1_XX_'].variable = 'e_1_XX_';labels['e_1_XX_'].readWrite = 'private';
-	labels['e_2_XX_'] = {};labels['e_2_XX_'].name = 'friend';labels['e_2_XX_'].variable = 'e_2_XX_';labels['e_2_XX_'].readWrite = 'private';
-	labels['r_2_XX_'] = {};labels['r_2_XX_'].name = 'r';labels['r_2_XX_'].variable = 'r_2_XX_';labels['r_2_XX_'].readWrite = 'private';
+	labels['r_1_XX_'] = {};labels['r_1_XX_'].name = 'satiation';labels['r_1_XX_'].variable = 'r_1_XX_';labels['r_1_XX_'].readWrite = 'write';labels['r_1_XX_'].value = r_1_XX_;
+	labels['e_1_XX_'] = {};labels['e_1_XX_'].name = 'food';labels['e_1_XX_'].variable = 'e_1_XX_';labels['e_1_XX_'].readWrite = 'private';labels['e_1_XX_'].value = e_1_XX_;
+	labels['e_2_XX_'] = {};labels['e_2_XX_'].name = 'friend';labels['e_2_XX_'].variable = 'e_2_XX_';labels['e_2_XX_'].readWrite = 'private';labels['e_2_XX_'].value = e_2_XX_;
+	labels['r_2_XX_'] = {};labels['r_2_XX_'].name = 'r';labels['r_2_XX_'].variable = 'r_2_XX_';labels['r_2_XX_'].readWrite = 'private';labels['r_2_XX_'].value = r_2_XX_;
 	
 	
 	
@@ -209,7 +209,7 @@ function update(){
 	else if (r_2_XX_ < 0 ){
 		r_2_XX_ = 0;
 	}
-	
+	updateLabelsWithVariableValues()
 	var percent0 = r_1_XX_/10;
 	percent0 = percent0 * 100;
 	this.resourceBar0.setPercent(percent0);
@@ -283,6 +283,7 @@ function o_5_XX__e_1_XX_ClickListener(clickedOnObject,pointer){
 };
 
 function setVariable(varName,value){
+	console.log("here is value!!!" , value);
 	variables[varName]=value;
 	//State.set(varName, value.toFixed(1));
 	//console.log('setting varName: ' , varName , ' to ' , value);
@@ -300,9 +301,16 @@ function informNarrativeOfUpdatedVariables(){
 	for (i = 0; i < Object.keys(labels).length; i += 1) {
 	var variableName = Object.keys(labels)[i];
 	    if(labels[variableName].readWrite === 'write'){
-	      setVariable(labels[variableName].name, window[labels[variableName].variable]);
+	      setVariable(labels[variableName].name, labels[variableName].value);
 	    }
 	  }
+};
+
+function updateLabelsWithVariableValues(){
+	for (i = 0; i < Object.keys(labels).length; i += 1) {
+	 var variableName = Object.keys(labels)[i];
+	 labels[variableName].value = eval(Object.keys(labels)[i]);
+	}
 };
 
 function getRandomPoint(){
