@@ -27,6 +27,24 @@
 <!--script src="js/test.js"></script-->
 <script>
 var game;
+var State = {'debugMode' : true};
+State.get = function(variableName){
+    return this[variableName];
+  };
+State.set = function(varName, varValue){
+  console.log("calling DEBUG State.set")
+};
+var Display = {}
+Display.setAvatars = function(State){
+  console.log("calling DEBUG setAvatars")
+}
+Display.setStats = function(storyStats){
+  console.log("Calling DEBUG setStats")
+}
+var StoryAssembler = {};
+StoryAssembler.refreshNarrative = function(){
+  console.log("StoryAssembler.refreshNarrative called in test framework.")
+}
 $( document ).ready(function() {
   game = new Phaser.Game(1000, 1000, Phaser.AUTO, 'gameContainer', { preload: preload, create: create, update: update, render: render }, true);
 
